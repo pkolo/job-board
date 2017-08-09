@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
   belongs_to :category
+  belongs_to :location
 
   validates :title, presence: true
   validates :details, presence: true
