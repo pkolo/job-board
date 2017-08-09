@@ -1,4 +1,4 @@
-class JobsController < ApplicationController
+class Api::JobsController < ApplicationController
 
   def index
   end
