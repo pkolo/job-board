@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "JobsController", type: :request do
+  # Initialize data
+  let(:jobs) { FactoryGirl.create_list(:job, 10) }
+
   describe 'GET /jobs' do
 
   end
