@@ -1,6 +1,7 @@
 class Api::JobsController < ApplicationController
 
   def index
+    render :json => {}, status: :ok
   end
 
   def show
