@@ -43,7 +43,7 @@ RSpec.describe "JobsController", type: :request do
           "details" => "#{first_job.details}",
           "date_posted" => "#{DateTime.current.strftime("%m/%d/%Y")}",
           "category" => "#{first_job.category.name}",
-          "city" => "Brooklyn, NY"
+          "city" => "#{first_job.location.to_s}"
         })
     end
 
