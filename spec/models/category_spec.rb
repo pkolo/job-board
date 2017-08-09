@@ -4,7 +4,7 @@ RSpec.describe Category, type: :model do
 
   describe "Factory" do
     it "creates a valid object" do
-      expect(FactoryGirl.create(:category)).to be_valid
+      expect(FactoryGirl.build(:category)).to be_valid
     end
   end
 

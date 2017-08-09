@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Job, type: :model do
   describe "Factory" do
     it "creates valid object" do
-      expect(FactoryGirl.create(:job)).to be_valid
+      expect(FactoryGirl.build(:job)).to be_valid
     end
   end
 
