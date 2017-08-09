@@ -15,6 +15,7 @@ gem 'puma', '~> 3.0'
 group :development, :test do
   # Debugger
   gem 'pry-rails'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :development do
@@ -27,7 +28,6 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
-  gem "factory_girl_rails", "~> 4.0"
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem 'faker'
 end
