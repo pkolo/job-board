@@ -25,7 +25,7 @@ class Api::JobsController < ApplicationController
 
   private
     def job_params
-      params.require(:job).permit(:title, :details, :latitude, :longitude)
+      params.require(:job).permit(:title, :details)
     end
 
 end
