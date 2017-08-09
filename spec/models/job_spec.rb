@@ -1,8 +1,8 @@
 require "rails_helper"
 
-Rspec.describe "Job", type: :model do
+RSpec.describe "Job", type: :model do
   describe "Factory" do
-    Factory.create(:job).should be_valid
+    FactoryGirl.create(:job).should be_valid
   end
 
   describe "Validations" do

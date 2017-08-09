@@ -1,9 +1,9 @@
 require "rails_helper"
 
-Rspec.describe "Category", type: :model do
+RSpec.describe "Category", type: :model do
 
   describe "Factory" do
-    Factory.create(:category).should be_valid
+    FactoryGirl.create(:category).should be_valid
   end
 
   describe "Validations" do

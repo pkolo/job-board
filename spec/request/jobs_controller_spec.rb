@@ -1,6 +1,6 @@
 require "rails_helper"
 
-Rspec.describe "JobsController", type: :request do
+RSpec.describe "JobsController", type: :request do
   describe 'GET /jobs' do
 
   end
