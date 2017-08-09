@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "JobsController", type: :request do
   # Initialize data
   let(:jobs) { FactoryGirl.create_list(:job, 5) }
+  let(:first_job) { jobs.first }
 
   describe 'GET /jobs' do
     # make HTTP get request before each example
@@ -33,6 +34,18 @@ RSpec.describe "JobsController", type: :request do
         expect(result["category"]).not_to be nil
         expect(result["city"]).not_to be nil
       end
+    end
+
+    it "first result matches first job in database" do
+      expect(parsed_response["result"].first).to eq
+        {
+          "id": "#{first_job.id}",
+          "title": "#{first_job.title}",
+          "details": "#{first_job.details}",
+          "date_posted": "#{DateTime.current.strftime("%m/%d/%Y")}",
+          "category": "#{first_job.category}",
+          "city": "Brooklyn, NY"
+        }
     end
 
   end
