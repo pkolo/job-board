@@ -11,6 +11,7 @@ class Job < ApplicationRecord
       title: self.title,
       details: self.details,
       date_posted: self.nice_date,
+      category: self.category.name
     }
   end
 
