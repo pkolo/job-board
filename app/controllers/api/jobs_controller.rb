@@ -1,7 +1,13 @@
 class Api::JobsController < ApplicationController
 
   def index
-    render :json => {}, status: :ok
+    render :json =>
+      {
+        status: "ok",
+        code: 200,
+        messages: [],
+        results: []
+      }, status: :ok
   end
 
   def show
