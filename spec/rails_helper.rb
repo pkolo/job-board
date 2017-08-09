@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'database_cleaner'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -54,6 +55,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Config database cleaners to reset DB before tests
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 end
 
 Shoulda::Matchers.configure do |config|
@@ -63,5 +70,23 @@ Shoulda::Matchers.configure do |config|
 
     # Or, choose the following (which implies all of the above):
     with.library :rails
+  end
+end
+
+module FactoryGirl
+  module Syntax
+    module Methods
+      def find_or_create(name, attributes = {}, &block)
+        attributes = FactoryGirl.attributes_for(name).merge(attributes)
+
+        result =
+          FactoryGirl.
+            factory_by_name(name).
+            build_class.
+            find_by(attributes, &block)
+
+        result || FactoryGirl.create(name, attributes, &block)
+      end
+    end
   end
 end
