@@ -3,7 +3,9 @@ require "rails_helper"
 RSpec.describe "Category", type: :model do
 
   describe "Factory" do
-    FactoryGirl.create(:category).should be_valid
+    it "creates a valid object" do
+      expect(FactoryGirl.create(:category)).to be_valid
+    end
   end
 
   describe "Validations" do
