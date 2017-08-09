@@ -27,6 +27,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
