@@ -5,6 +5,6 @@ FactoryGirl.define do
     city { place[:city] }
     state { place[:state] }
 
-    initialize_with { Category.find_or_create_by(city: city, state: state) }
+    initialize_with { Location.find_or_create_by(city: city, state: state) }
   end
 end
