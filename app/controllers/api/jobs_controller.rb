@@ -1,12 +1,13 @@
 class Api::JobsController < ApplicationController
 
   def index
+    @jobs = Job.all
     render :json =>
       {
         status: "ok",
         code: 200,
         messages: [],
-        results: []
+        result: @jobs.map { |job| job.serialize },
       }, status: :ok
   end
 
