@@ -112,7 +112,61 @@ RSpec.describe "JobsController", type: :request do
   end
 
   describe 'GET /jobs/:id' do
+    describe 'success' do
+      let(:random_job) { jobs.sample }
+      before { get "/api/jobs/#{random_job.id}"}
+      let(:parsed_response) { JSON.parse(response.body) }
 
+      it "returns json" do
+        expect(response.content_type).to eq("application/json")
+      end
+
+      it "returns a success response code" do
+        expect(response).to have_http_status(200)
+      end
+
+      it "contains meta" do
+        expect(parsed_response["status"]).not_to be nil
+        expect(parsed_response["code"]).not_to be nil
+        expect(parsed_response["messages"]).not_to be nil
+        expect(parsed_response["result"]).not_to be nil
+      end
+
+      it "returns JSON object created from new database entry" do
+        expect(parsed_response["result"]).to eq({
+            "id" => "#{random_job.id}",
+            "title" => "#{random_job.title}",
+            "details" => "#{random_job.details}",
+            "date_posted" => "#{random_job.nice_date}",
+            "category" => "#{random_job.category.name}",
+            "city" => "#{random_job.location.to_s}"
+          })
+      end
+    end
+
+    describe 'non-existent id' do
+      before { get "/api/jobs/#{jobs.length + 100}"}
+      let(:parsed_response) { JSON.parse(response.body) }
+
+      it "returns json" do
+        expect(response.content_type).to eq("application/json")
+      end
+
+      it "returns a not found response code" do
+        expect(response).to have_http_status(404)
+      end
+
+      it "contains meta" do
+        expect(parsed_response["status"]).not_to be nil
+        expect(parsed_response["code"]).not_to be nil
+        expect(parsed_response["messages"]).not_to be nil
+        expect(parsed_response["result"]).not_to be nil
+      end
+
+      it "contains error messages" do
+        expect(parsed_response["messages"]).to include("Record not found.")
+      end
+    end
   end
 
   describe 'PUT /jobs/:id' do
