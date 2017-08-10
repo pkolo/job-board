@@ -7,6 +7,10 @@ class Job < ApplicationRecord
   validates :title, presence: true
   validates :details, presence: true
 
+  def as_json(options)
+    self.serialize
+  end
+
   # Sets associated category by name
   def category_name=(name)
     self.category = Category.find_or_initialize_by(name: name)
