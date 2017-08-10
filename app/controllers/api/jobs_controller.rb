@@ -9,7 +9,7 @@ class Api::JobsController < ApplicationController
         status: "ok",
         code: 200,
         messages: [],
-        result: ActiveModel::Serializer::CollectionSerializer.new(jobs, each_serializer: JobSerializer)
+        result: jobs
       }, status: :ok
   end
 
