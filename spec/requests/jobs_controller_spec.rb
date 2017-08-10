@@ -1,5 +1,7 @@
 require "rails_helper"
 
+# Lots of repition in these tests-- look for ways to DRY.
+
 RSpec.describe "JobsController", type: :request do
   # Initialize data
   let!(:jobs) { create_list(:job, 10) }
@@ -194,10 +196,10 @@ RSpec.describe "JobsController", type: :request do
       it "returns JSON object with updated attributes" do
         expect(parsed_response["result"]).to eq({
             "id" => random_job.id,
-            "title" => "#{update_attributes[:title]}",
-            "details" => "#{update_attributes[:details]}",
+            "title" => "#{update_attributes[:job][:title]}",
+            "details" => "#{update_attributes[:job][:details]}",
             "date_posted" => "#{random_job.nice_date}",
-            "category" => "#{update_attributes[:category_name]}",
+            "category" => "#{update_attributes[:job][:category_name]}",
             "city" => "#{random_job.location.to_s}"
           })
       end
