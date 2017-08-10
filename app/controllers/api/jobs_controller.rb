@@ -26,7 +26,12 @@ class Api::JobsController < ApplicationController
       }, status: :created
     else
       render :json =>
-      {}
+      {
+        status: "errors",
+        code: 422,
+        messages: @job.errors.full_messages,
+        result: []
+      }, status: :unprocessable_entity
     end
   end
 
