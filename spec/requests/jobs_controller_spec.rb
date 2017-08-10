@@ -33,7 +33,7 @@ RSpec.describe "JobsController", type: :request do
         expect(result["details"]).not_to be nil
         expect(result["date_posted"]).not_to be nil
         expect(result["category"]).not_to be nil
-        expect(result["city"]).not_to be nil
+        expect(result["location"]).not_to be nil
       end
     end
 
@@ -43,8 +43,8 @@ RSpec.describe "JobsController", type: :request do
           "title" => "#{first_job.title}",
           "details" => "#{first_job.details}",
           "date_posted" => "#{first_job.nice_date}",
-          "category" => "#{first_job.category.name}",
-          "city" => "#{first_job.location.to_s}"
+          "category" => {"name": "#{first_job.category.name}", "id": "#{first_job.category.id}"},
+          "location" => {"city": "#{first_job.location.city}", "state": "#{first_job.location.state}", "id": "#{first_job.location.id}"}
         })
     end
 
@@ -77,8 +77,8 @@ RSpec.describe "JobsController", type: :request do
             "title" => "#{last_job.title}",
             "details" => "#{last_job.details}",
             "date_posted" => "#{last_job.nice_date}",
-            "category" => "#{last_job.category.name}",
-            "city" => "#{last_job.location.to_s}"
+            "category" => {"name": "#{last_job.category.name}", "id": "#{last_job.category.id}"},
+            "location" => {"city": "#{last_job.location.city}", "state": "#{last_job.location.state}", "id": "#{last_job.location.id}"}
           })
       end
     end
@@ -135,8 +135,8 @@ RSpec.describe "JobsController", type: :request do
             "title" => "#{random_job.title}",
             "details" => "#{random_job.details}",
             "date_posted" => "#{random_job.nice_date}",
-            "category" => "#{random_job.category.name}",
-            "city" => "#{random_job.location.to_s}"
+            "category" => {"name": "#{random_job.category.name}", "id": "#{random_job.category.id}"},
+            "location" => {"city": "#{random_job.location.city}", "state": "#{random_job.location.state}", "id": "#{random_job.location.id}"}
           })
       end
     end
@@ -168,7 +168,7 @@ RSpec.describe "JobsController", type: :request do
   describe 'PUT /jobs/:id' do
     describe 'success' do
       let(:random_job) { jobs.sample }
-      let(:update_attributes) { {job:{title: Faker::Lorem.sentence, details: Faker::Lorem.paragraph, category_name: "Home"}} }
+      let(:update_attributes) { {job:{title: Faker::Lorem.sentence, details: Faker::Lorem.paragraph} }
       before { put "/api/jobs/#{random_job.id}", params: update_attributes }
       let(:parsed_response) { JSON.parse(response.body) }
 
@@ -192,8 +192,8 @@ RSpec.describe "JobsController", type: :request do
             "title" => "#{update_attributes[:job][:title]}",
             "details" => "#{update_attributes[:job][:details]}",
             "date_posted" => "#{random_job.nice_date}",
-            "category" => "#{update_attributes[:job][:category_name]}",
-            "city" => "#{random_job.location.to_s}"
+            "category" => {"name": "#{random_job.category.name}", "id": "#{random_job.category.id}"},
+            "location" => {"city": "#{random_job.location.city}", "state": "#{random_job.location.state}", "id": "#{random_job.location.id}"}
           })
       end
     end
