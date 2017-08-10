@@ -21,7 +21,6 @@ RSpec.describe "JobsController", type: :request do
     end
 
     it "contains meta" do
-      expect(parsed_response["status"]).not_to be nil
       expect(parsed_response["code"]).not_to be nil
       expect(parsed_response["messages"]).not_to be nil
       expect(parsed_response["result"]).not_to be nil
@@ -52,7 +51,6 @@ RSpec.describe "JobsController", type: :request do
   end
 
   describe 'POST /jobs' do
-
     describe 'success' do
       let(:valid_attributes) { {job:{title: Faker::Lorem.sentence, details: Faker::Lorem.paragraph, category_name: "Repair", location_attributes: {city: "Brooklyn", state: "NY"}}} }
       before { post '/api/jobs', params: valid_attributes }
@@ -68,7 +66,6 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "contains meta" do
-        expect(parsed_response["status"]).not_to be nil
         expect(parsed_response["code"]).not_to be nil
         expect(parsed_response["messages"]).not_to be nil
         expect(parsed_response["result"]).not_to be nil
@@ -100,7 +97,6 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "contains meta" do
-        expect(parsed_response["status"]).not_to be nil
         expect(parsed_response["code"]).not_to be nil
         expect(parsed_response["messages"]).not_to be nil
         expect(parsed_response["result"]).not_to be nil
@@ -128,7 +124,6 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "contains meta" do
-        expect(parsed_response["status"]).not_to be nil
         expect(parsed_response["code"]).not_to be nil
         expect(parsed_response["messages"]).not_to be nil
         expect(parsed_response["result"]).not_to be nil
@@ -159,7 +154,6 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "contains meta" do
-        expect(parsed_response["status"]).not_to be nil
         expect(parsed_response["code"]).not_to be nil
         expect(parsed_response["messages"]).not_to be nil
         expect(parsed_response["result"]).not_to be nil
@@ -187,7 +181,6 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "contains meta" do
-        expect(parsed_response["status"]).not_to be nil
         expect(parsed_response["code"]).not_to be nil
         expect(parsed_response["messages"]).not_to be nil
         expect(parsed_response["result"]).not_to be nil
@@ -220,7 +213,6 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "contains meta" do
-        expect(parsed_response["status"]).not_to be nil
         expect(parsed_response["code"]).not_to be nil
         expect(parsed_response["messages"]).not_to be nil
         expect(parsed_response["result"]).not_to be nil
@@ -246,7 +238,6 @@ RSpec.describe "JobsController", type: :request do
     end
 
     it "contains meta" do
-      expect(parsed_response["status"]).not_to be nil
       expect(parsed_response["code"]).not_to be nil
       expect(parsed_response["messages"]).not_to be nil
       expect(parsed_response["result"]).not_to be nil
