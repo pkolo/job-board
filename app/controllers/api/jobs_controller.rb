@@ -55,7 +55,7 @@ class Api::JobsController < ApplicationController
       {
         status: "ok",
         code: 200,
-        messages: ["Successfully updated."],
+        messages: ["Job successfully updated."],
         result: @job
       }, status: :ok
     else
@@ -76,7 +76,7 @@ class Api::JobsController < ApplicationController
       {
         status: "ok",
         code: 200,
-        messages: ["Successfully deleted."],
+        messages: ["Job successfully deleted."],
         result: []
       }, status: :ok
     end
