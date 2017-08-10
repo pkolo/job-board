@@ -105,7 +105,7 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "contains error messages" do
-        expect(parsed_response["messages"]).to include("can't be blank")
+        expect(parsed_response["messages"]).to include("Title can't be blank")
       end
     end
 
