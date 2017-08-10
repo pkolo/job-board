@@ -168,7 +168,7 @@ RSpec.describe "JobsController", type: :request do
   describe 'PUT /jobs/:id' do
     describe 'success' do
       let(:random_job) { jobs.sample }
-      let(:update_attributes) { {job:{title: Faker::Lorem.sentence, details: Faker::Lorem.paragraph} }
+      let(:update_attributes) { {job:{title: Faker::Lorem.sentence, details: Faker::Lorem.paragraph}} }
       before { put "/api/jobs/#{random_job.id}", params: update_attributes }
       let(:parsed_response) { JSON.parse(response.body) }
 
