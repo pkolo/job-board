@@ -1,6 +1,19 @@
-class JobSerializer < ActiveModel::Serializer
-  attributes :id, :title, :details, :date_posted
-
-  belongs_to :category
-  belongs_to :location
+module JobSerializer
+  def serialize
+    {
+      "id" => self.id,
+      "title" => self.title,
+      "details" => self.details,
+      "date_posted" => self.date_posted,
+      "category" => {
+        "name" => self.category.name,
+        "id" => self.category.id
+      },
+      "location" => {
+        "city" => self.location.city,
+        "state" => self.location.state,
+        "id" => self.location.id
+      }
+    }
+  end
 end
