@@ -1,5 +1,5 @@
 class Location < ApplicationRecord
-  has_many :jobs
+  has_many :jobs, inverse_of: :location
 
   validates :city, presence: true
   validates :state, presence: true
