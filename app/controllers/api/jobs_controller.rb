@@ -70,6 +70,16 @@ class Api::JobsController < ApplicationController
   end
 
   def destroy
+    @job = Job.find(params[:id])
+    if @job.destroy
+      render :json =>
+      {
+        status: "ok",
+        code: 200,
+        messages: ["Successfully deleted."],
+        result: []
+      }, status: :ok
+    end
   end
 
   def not_found
