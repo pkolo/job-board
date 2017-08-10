@@ -48,6 +48,25 @@ class Api::JobsController < ApplicationController
   end
 
   def update
+    @job = Job.find(params[:id])
+    @job.update_attributes(job_params)
+    if @job.save
+      render :json =>
+      {
+        status: "ok",
+        code: 200,
+        messages: ["Successfully updated."],
+        result: @job.serialize
+      }, status: :ok
+    else
+      render :json =>
+      {
+        status: "errors",
+        code: 422,
+        messages: @job.errors.full_messages,
+        result: []
+      }, status: :unprocessable_entity
+    end
   end
 
   def destroy
