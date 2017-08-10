@@ -92,6 +92,7 @@ Deletes a job associated with a give id.
 ```
 {
     "code": 200,
-    "messages": ["Job successfully deleted."]
+    "messages": ["Job successfully deleted."],
+    "result": []
   }
-  ```s
+  ```
