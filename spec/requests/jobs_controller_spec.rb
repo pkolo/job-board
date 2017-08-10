@@ -231,6 +231,27 @@ RSpec.describe "JobsController", type: :request do
   end
 
   describe 'DELETE /jobs/:id' do
+    let(:random_job) { jobs.sample }
+    before { delete "/api/jobs/#{random_job.id}"}
+    let(:parsed_response) { JSON.parse(response.body) }
 
+    it "returns json" do
+      expect(response.content_type).to eq("application/json")
+    end
+
+    it "returns a success response code" do
+      expect(response).to have_http_status(200)
+    end
+
+    it "contains meta" do
+      expect(parsed_response["status"]).not_to be nil
+      expect(parsed_response["code"]).not_to be nil
+      expect(parsed_response["messages"]).not_to be nil
+      expect(parsed_response["result"]).not_to be nil
+    end
+
+    it "returns success message" do
+      expect(parsed_response["messages"]).to include("Successfully deleted.")
+    end
   end
 end
