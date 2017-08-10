@@ -58,10 +58,6 @@ RSpec.configure do |config|
 
   # Config database cleaners to reset DB before tests
   # Configure Database Cleaner
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end
@@ -76,6 +72,9 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    ActiveRecord::Base.connection.execute 'ALTER SEQUENCE jobs_id_seq RESTART WITH 1'
+    ActiveRecord::Base.connection.execute 'ALTER SEQUENCE categories_id_seq RESTART WITH 1'
+    ActiveRecord::Base.connection.execute 'ALTER SEQUENCE locations_id_seq RESTART WITH 1'
   end
 end
 
