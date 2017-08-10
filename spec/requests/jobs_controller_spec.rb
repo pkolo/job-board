@@ -244,7 +244,7 @@ RSpec.describe "JobsController", type: :request do
     end
 
     it "returns success message" do
-      expect(parsed_response["messages"]).to include("Successfully deleted.")
+      expect(parsed_response["messages"]).to include("Job successfully deleted.")
     end
   end
 end
