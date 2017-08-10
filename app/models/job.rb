@@ -1,4 +1,6 @@
 class Job < ApplicationRecord
+  include JobSerializer
+
   belongs_to :category
   belongs_to :location
 
