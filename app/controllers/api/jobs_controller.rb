@@ -3,13 +3,13 @@ class Api::JobsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
-    @jobs = Job.all
+    jobs = Job.all
     render :json =>
       {
         status: "ok",
         code: 200,
         messages: [],
-        result: @jobs.map { |job| job.serialize }
+        result: ActiveModel::Serializer::CollectionSerializer.new(jobs, each_serializer: JobSerializer)
       }, status: :ok
   end
 
@@ -21,7 +21,7 @@ class Api::JobsController < ApplicationController
         status: "ok",
         code: 200,
         messages: [],
-        result: @job.serialize
+        result: @job
       }, status: :ok
     end
   end
@@ -34,7 +34,7 @@ class Api::JobsController < ApplicationController
         status: "ok",
         code: 201,
         messages: [],
-        result: @job.serialize
+        result: @job
       }, status: :created
     else
       render :json =>
@@ -56,7 +56,7 @@ class Api::JobsController < ApplicationController
         status: "ok",
         code: 200,
         messages: ["Successfully updated."],
-        result: @job.serialize
+        result: @job
       }, status: :ok
     else
       render :json =>
