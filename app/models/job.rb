@@ -14,20 +14,8 @@ class Job < ApplicationRecord
     self.location = Location.find_or_initialize_by(city: attrs[:city], state: attrs[:state])
   end
 
-  # Formats a hash to be converted to JSON and returned by the API.
-  def serialize
-    {
-      id: self.id,
-      title: self.title,
-      details: self.details,
-      date_posted: self.nice_date,
-      category: self.category.name,
-      city: self.location.to_s
-    }
-  end
-
   # Formats the creation date into a string
-  def nice_date
+  def date_posted
     d = self.created_at
     d.strftime("%m/%d/%Y")
   end
