@@ -134,7 +134,7 @@ RSpec.describe "JobsController", type: :request do
 
       it "returns JSON object created from new database entry" do
         expect(parsed_response["result"]).to eq({
-            "id" => "#{random_job.id}",
+            "id" => random_job.id,
             "title" => "#{random_job.title}",
             "details" => "#{random_job.details}",
             "date_posted" => "#{random_job.nice_date}",
