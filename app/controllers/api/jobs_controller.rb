@@ -16,11 +16,17 @@ class Api::JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-
     if @job.save
-      render :json => {}, status: :created
+      render :json =>
+      {
+        status: "ok",
+        code: 200,
+        messages: [],
+        result: @job.serialize
+      }, status: :created
     else
-      render :json => {}, status: :unprocessable_entity
+      render :json =>
+      {}
     end
   end
 
