@@ -1,5 +1,7 @@
 class Api::JobsController < ApplicationController
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   def index
     @jobs = Job.all
     render :json =>
@@ -12,6 +14,16 @@ class Api::JobsController < ApplicationController
   end
 
   def show
+    @job = Job.find(params[:id])
+    if @job.save
+      render :json =>
+      {
+        status: "ok",
+        code: 200,
+        messages: [],
+        result: @job.serialize
+      }, status: :ok
+    end
   end
 
   def create
@@ -20,7 +32,7 @@ class Api::JobsController < ApplicationController
       render :json =>
       {
         status: "ok",
-        code: 200,
+        code: 201,
         messages: [],
         result: @job.serialize
       }, status: :created
@@ -39,6 +51,16 @@ class Api::JobsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def not_found
+    render :json =>
+    {
+      status: "errors",
+      code: 404,
+      messages: ["Record not found."],
+      result: []
+    }, status: :not_found
   end
 
   private
