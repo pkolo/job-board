@@ -41,7 +41,7 @@ RSpec.describe "JobsController", type: :request do
           "id" => first_job.id,
           "title" => "#{first_job.title}",
           "details" => "#{first_job.details}",
-          "date_posted" => "#{DateTime.current.strftime("%m/%d/%Y")}",
+          "date_posted" => "#{first_job.nice_date}",
           "category" => "#{first_job.category.name}",
           "city" => "#{first_job.location.to_s}"
         })
@@ -50,6 +50,39 @@ RSpec.describe "JobsController", type: :request do
   end
 
   describe 'POST /jobs' do
+
+    describe 'success' do
+      let(:valid_attributes) { {job:{title: Faker::Lorem.sentence, details: Faker::Lorem.paragraph, category_name: "Repair", location_attributes: {city: "Brooklyn", state: "NY"}}} }
+      before { post '/api/jobs', params: valid_attributes }
+      let(:parsed_response) { JSON.parse(response.body) }
+      let(:last_job) { Job.last }
+
+      it "returns json" do
+        expect(response.content_type).to eq("application/json")
+      end
+
+      it "returns a successfully created response code" do
+        expect(response).to have_http_status(201)
+      end
+
+      it "contains meta" do
+        expect(parsed_response["status"]).not_to be nil
+        expect(parsed_response["code"]).not_to be nil
+        expect(parsed_response["messages"]).not_to be nil
+        expect(parsed_response["result"]).not_to be nil
+      end
+
+      it "returns JSON object created from new database entry" do
+        expect(parsed_response["result"]).to eq({
+            "id" => jobs.length + 1,
+            "title" => "#{last_job.title}",
+            "details" => "#{last_job.details}",
+            "date_posted" => "#{last_job.nice_date}",
+            "category" => "#{last_job.category.name}",
+            "city" => "#{last_job.location.to_s}"
+          })
+      end
+    end
 
   end
 
