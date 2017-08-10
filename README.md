@@ -1,24 +1,98 @@
-# README
+# Job Board API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Serves the following endpoints:
 
-Things you may want to cover:
+`GET /jobs`
 
-* Ruby version
+Returns a list of all jobs.
 
-* System dependencies
+  ```
+  {
+      "code": 200,
+      "messages": [],
+      "result":
+        [
+          {
+            "id": 1,
+            "title": "I need a bedroom painted",
+            "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
+            "date_posted": "08/25/2017",
+            "category": {"name": "Home", "id": 1},
+            "location": {"city": "Brooklyn", "state": "NY", "id": 1}
+          },
+          ...
+        ]
+    }
+    ```
 
-* Configuration
+`POST /jobs`
 
-* Database creation
+Creates a new job.
 
-* Database initialization
+  ```
+  {
+      "code": 201,
+      "messages": [],
+      "result":
+        {
+          "id": 1,
+          "title": "I need a bedroom painted",
+          "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
+          "date_posted": "08/25/2017",
+          "category": {"name": "Home", "id": 1},
+          "location": {"city": "Brooklyn", "state": "NY", "id": 1}
+        }
+    }
+    ```
 
-* How to run the test suite
+`GET /jobs/{job_id}`
 
-* Services (job queues, cache servers, search engines, etc.)
+Returns a job associated with a give id.
 
-* Deployment instructions
+```
+{
+    "code": 200,
+    "messages": [],
+    "result":
+      {
+        "id": 1,
+        "title": "I need a bedroom painted",
+        "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
+        "date_posted": "08/25/2017",
+        "category": {"name": "Home", "id": 1},
+        "location": {"city": "Brooklyn", "state": "NY", "id": 1}
+      }
+  }
+  ```
 
-* ...
+`PUT /jobs/{job_id}`
+
+Updates a job associated with a give id.
+
+```
+{
+    "code": 200,
+    "messages": ["Job successfully updated."],
+    "result":
+      {
+        "id": 1,
+        "title": "I need a bedroom painted",
+        "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
+        "date_posted": "08/25/2017",
+        "category": {"name": "Home", "id": 1},
+        "location": {"city": "Brooklyn", "state": "NY", "id": 1}
+      }
+  }
+  ```
+
+`DELETE /jobs/{job_id}`
+
+Deletes a job associated with a give id.
+
+```
+{
+    "code": 200,
+    "messages": ["Job successfully deleted."],
+    "result": []
+  }
+  ```
