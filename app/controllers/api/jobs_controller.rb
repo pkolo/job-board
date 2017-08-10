@@ -7,7 +7,7 @@ class Api::JobsController < ApplicationController
         status: "ok",
         code: 200,
         messages: [],
-        result: @jobs.map { |job| job.serialize },
+        result: @jobs.map { |job| job.serialize }
       }, status: :ok
   end
 
@@ -25,7 +25,7 @@ class Api::JobsController < ApplicationController
 
   private
     def job_params
-      params.require(:job).permit(:title, :details)
+      params.require(:job).permit(:title, :details, :category_name, :location_attributes => [:id, :city, :state])
     end
 
 end
