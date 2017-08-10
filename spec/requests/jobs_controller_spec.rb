@@ -43,8 +43,8 @@ RSpec.describe "JobsController", type: :request do
           "title" => "#{first_job.title}",
           "details" => "#{first_job.details}",
           "date_posted" => "#{first_job.nice_date}",
-          "category" => {"name": "#{first_job.category.name}", "id": "#{first_job.category.id}"},
-          "location" => {"city": "#{first_job.location.city}", "state": "#{first_job.location.state}", "id": "#{first_job.location.id}"}
+          "category" => {"name" => "#{first_job.category.name}", "id" => first_job.category.id},
+          "location" => {"city" => "#{first_job.location.city}", "state" => "#{first_job.location.state}", "id" => first_job.location.id}
         })
     end
 
@@ -77,8 +77,8 @@ RSpec.describe "JobsController", type: :request do
             "title" => "#{last_job.title}",
             "details" => "#{last_job.details}",
             "date_posted" => "#{last_job.nice_date}",
-            "category" => {"name": "#{last_job.category.name}", "id": "#{last_job.category.id}"},
-            "location" => {"city": "#{last_job.location.city}", "state": "#{last_job.location.state}", "id": "#{last_job.location.id}"}
+            "category" => {"name" => "#{last_job.category.name}", "id" => last_job.category.id},
+            "location" => {"city" => "#{last_job.location.city}", "state" => "#{last_job.location.state}", "id" => last_job.location.id}
           })
       end
     end
@@ -135,8 +135,8 @@ RSpec.describe "JobsController", type: :request do
             "title" => "#{random_job.title}",
             "details" => "#{random_job.details}",
             "date_posted" => "#{random_job.nice_date}",
-            "category" => {"name": "#{random_job.category.name}", "id": "#{random_job.category.id}"},
-            "location" => {"city": "#{random_job.location.city}", "state": "#{random_job.location.state}", "id": "#{random_job.location.id}"}
+            "category" => {"name" => "#{random_job.category.name}", "id" => random_job.category.id},
+            "location" => {"city" => "#{random_job.location.city}", "state" => "#{random_job.location.state}", "id" => random_job.location.id}
           })
       end
     end
@@ -192,8 +192,8 @@ RSpec.describe "JobsController", type: :request do
             "title" => "#{update_attributes[:job][:title]}",
             "details" => "#{update_attributes[:job][:details]}",
             "date_posted" => "#{random_job.nice_date}",
-            "category" => {"name": "#{random_job.category.name}", "id": "#{random_job.category.id}"},
-            "location" => {"city": "#{random_job.location.city}", "state": "#{random_job.location.state}", "id": "#{random_job.location.id}"}
+            "category" => {"name" => "#{random_job.category.name}", "id" => random_job.category.id},
+            "location" => {"city" => "#{random_job.location.city}", "state" => "#{random_job.location.state}", "id" => random_job.location.id}
           })
       end
     end
