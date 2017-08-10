@@ -42,7 +42,7 @@ RSpec.describe "JobsController", type: :request do
           "id" => first_job.id,
           "title" => "#{first_job.title}",
           "details" => "#{first_job.details}",
-          "date_posted" => "#{first_job.nice_date}",
+          "date_posted" => "#{first_job.date_posted}",
           "category" => {"name" => "#{first_job.category.name}", "id" => first_job.category.id},
           "location" => {"city" => "#{first_job.location.city}", "state" => "#{first_job.location.state}", "id" => first_job.location.id}
         })
@@ -76,7 +76,7 @@ RSpec.describe "JobsController", type: :request do
             "id" => jobs.length + 1,
             "title" => "#{last_job.title}",
             "details" => "#{last_job.details}",
-            "date_posted" => "#{last_job.nice_date}",
+            "date_posted" => "#{last_job.date_posted}",
             "category" => {"name" => "#{last_job.category.name}", "id" => last_job.category.id},
             "location" => {"city" => "#{last_job.location.city}", "state" => "#{last_job.location.state}", "id" => last_job.location.id}
           })
@@ -134,7 +134,7 @@ RSpec.describe "JobsController", type: :request do
             "id" => random_job.id,
             "title" => "#{random_job.title}",
             "details" => "#{random_job.details}",
-            "date_posted" => "#{random_job.nice_date}",
+            "date_posted" => "#{random_job.date_posted}",
             "category" => {"name" => "#{random_job.category.name}", "id" => random_job.category.id},
             "location" => {"city" => "#{random_job.location.city}", "state" => "#{random_job.location.state}", "id" => random_job.location.id}
           })
@@ -191,7 +191,7 @@ RSpec.describe "JobsController", type: :request do
             "id" => random_job.id,
             "title" => "#{update_attributes[:job][:title]}",
             "details" => "#{update_attributes[:job][:details]}",
-            "date_posted" => "#{random_job.nice_date}",
+            "date_posted" => "#{random_job.date_posted}",
             "category" => {"name" => "#{random_job.category.name}", "id" => random_job.category.id},
             "location" => {"city" => "#{random_job.location.city}", "state" => "#{random_job.location.state}", "id" => random_job.location.id}
           })
