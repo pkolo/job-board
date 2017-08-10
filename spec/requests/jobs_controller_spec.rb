@@ -170,7 +170,64 @@ RSpec.describe "JobsController", type: :request do
   end
 
   describe 'PUT /jobs/:id' do
+    describe 'success' do
+      let(:random_job) { jobs.sample }
+      let(:update_attributes) { {job:{title: Faker::Lorem.sentence, details: Faker::Lorem.paragraph, category_name: "Home"}} }
+      before { put "/api/jobs/#{random_job.id}", params: update_attributes }
+      let(:parsed_response) { JSON.parse(response.body) }
 
+      it "returns json" do
+        expect(response.content_type).to eq("application/json")
+      end
+
+      it "returns a success response code" do
+        expect(response).to have_http_status(200)
+      end
+
+      it "contains meta" do
+        expect(parsed_response["status"]).not_to be nil
+        expect(parsed_response["code"]).not_to be nil
+        expect(parsed_response["messages"]).not_to be nil
+        expect(parsed_response["result"]).not_to be nil
+      end
+
+      it "returns JSON object with updated attributes" do
+        expect(parsed_response["result"]).to eq({
+            "id" => random_job.id,
+            "title" => "#{update_attributes[:title]}",
+            "details" => "#{update_attributes[:details]}",
+            "date_posted" => "#{random_job.nice_date}",
+            "category" => "#{update_attributes[:category_name]}",
+            "city" => "#{random_job.location.to_s}"
+          })
+      end
+    end
+
+    describe "with invalid params" do
+      let(:random_job) { jobs.sample }
+      let(:invalid_attributes) { {job:{title: nil}} }
+      before { put "/api/jobs/#{random_job.id}", params: invalid_attributes }
+      let(:parsed_response) { JSON.parse(response.body) }
+
+      it "returns json" do
+        expect(response.content_type).to eq("application/json")
+      end
+
+      it "returns an unprocessable entity response code" do
+        expect(response).to have_http_status(422)
+      end
+
+      it "contains meta" do
+        expect(parsed_response["status"]).not_to be nil
+        expect(parsed_response["code"]).not_to be nil
+        expect(parsed_response["messages"]).not_to be nil
+        expect(parsed_response["result"]).not_to be nil
+      end
+
+      it "contains error messages" do
+        expect(parsed_response["messages"]).to include("Title can't be blank")
+      end
+    end
   end
 
   describe 'DELETE /jobs/:id' do
