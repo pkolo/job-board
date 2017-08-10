@@ -84,6 +84,31 @@ RSpec.describe "JobsController", type: :request do
       end
     end
 
+    describe "with invalid params" do
+      let(:invalid_attributes) { {job:{title: nil, details: nil, category_name: "Repair", location_attributes: {city: "Brooklyn", state: "NY"}}} }
+      before { post '/api/jobs', params: invalid_attributes }
+      let(:parsed_response) { JSON.parse(response.body) }
+
+      it "returns json" do
+        expect(response.content_type).to eq("application/json")
+      end
+
+      it "returns an unprocessable entity response code" do
+        expect(response).to have_http_status(422)
+      end
+
+      it "contains meta" do
+        expect(parsed_response["status"]).not_to be nil
+        expect(parsed_response["code"]).not_to be nil
+        expect(parsed_response["messages"]).not_to be nil
+        expect(parsed_response["result"]).not_to be nil
+      end
+
+      it "contains error messages" do
+        expect(parsed_response["messages"]).to include("can't be blank")
+      end
+    end
+
   end
 
   describe 'GET /jobs/:id' do
