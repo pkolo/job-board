@@ -12,6 +12,8 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 
+gem 'faker'
+
 group :development, :test do
   # Debugger
   gem 'pry-rails'
@@ -29,7 +31,6 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
-  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
