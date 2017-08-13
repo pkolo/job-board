@@ -5,7 +5,7 @@ class Job < ApplicationRecord
   belongs_to :location
   validates_associated :category, :location
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { minimum: 10, maximum: 75 }
   validates :details, presence: true
   validates :location, presence: true
   validates :category, presence: true
