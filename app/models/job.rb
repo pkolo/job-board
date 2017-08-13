@@ -3,9 +3,12 @@ class Job < ApplicationRecord
 
   belongs_to :category
   belongs_to :location
+  validates_associated :category, :location
 
   validates :title, presence: true
   validates :details, presence: true
+  validates :location, presence: true
+  validates :category, presence: true
 
   def as_json(options)
     self.serialize
