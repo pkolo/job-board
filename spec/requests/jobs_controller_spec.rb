@@ -38,14 +38,7 @@ RSpec.describe "JobsController", type: :request do
     end
 
     it "first result matches first job in database" do
-      expect(parsed_response["result"].first).to eq({
-          "id" => first_job.id,
-          "title" => "#{first_job.title}",
-          "details" => "#{first_job.details}",
-          "date_posted" => "#{first_job.date_posted}",
-          "category" => {"name" => "#{first_job.category.name}", "id" => first_job.category.id},
-          "location" => {"city" => "#{first_job.location.city}", "state" => "#{first_job.location.state}", "id" => first_job.location.id}
-        })
+      expect(parsed_response["result"].first).to eq(first_job.serialize)
     end
 
   end
@@ -72,14 +65,7 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "returns JSON object created from new database entry" do
-        expect(parsed_response["result"]).to eq({
-            "id" => jobs.length + 1,
-            "title" => "#{last_job.title}",
-            "details" => "#{last_job.details}",
-            "date_posted" => "#{last_job.date_posted}",
-            "category" => {"name" => "#{last_job.category.name}", "id" => last_job.category.id},
-            "location" => {"city" => "#{last_job.location.city}", "state" => "#{last_job.location.state}", "id" => last_job.location.id}
-          })
+        expect(parsed_response["result"]).to eq(last_job.serialize)
       end
     end
 
@@ -130,14 +116,7 @@ RSpec.describe "JobsController", type: :request do
       end
 
       it "returns JSON object created from new database entry" do
-        expect(parsed_response["result"]).to eq({
-            "id" => random_job.id,
-            "title" => "#{random_job.title}",
-            "details" => "#{random_job.details}",
-            "date_posted" => "#{random_job.date_posted}",
-            "category" => {"name" => "#{random_job.category.name}", "id" => random_job.category.id},
-            "location" => {"city" => "#{random_job.location.city}", "state" => "#{random_job.location.state}", "id" => random_job.location.id}
-          })
+        expect(parsed_response["result"]).to eq(random_job.serialize)
       end
     end
 
@@ -191,7 +170,7 @@ RSpec.describe "JobsController", type: :request do
             "id" => random_job.id,
             "title" => "#{update_attributes[:job][:title]}",
             "details" => "#{update_attributes[:job][:details]}",
-            "date_posted" => "#{random_job.date_posted}",
+            "date_posted" => "#{random_job.created_at.iso8601}",
             "category" => {"name" => "#{random_job.category.name}", "id" => random_job.category.id},
             "location" => {"city" => "#{random_job.location.city}", "state" => "#{random_job.location.state}", "id" => random_job.location.id}
           })
