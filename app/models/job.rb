@@ -10,6 +10,8 @@ class Job < ApplicationRecord
   validates :location, presence: true
   validates :category, presence: true
 
+  scope :reverse_chronological, -> { order(created_at: :desc) }
+
   def as_json(options)
     self.serialize
   end
