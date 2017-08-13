@@ -23,10 +23,4 @@ class Job < ApplicationRecord
     self.location = Location.find_or_initialize_by(city: attrs[:city], state: attrs[:state])
   end
 
-  # Formats the creation date into a string
-  def date_posted
-    d = self.created_at
-    d.strftime("%m/%d/%Y")
-  end
-
 end
