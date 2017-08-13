@@ -22,7 +22,7 @@ class Job < ApplicationRecord
   end
 
   def location_attributes=(attrs)
-    self.location = Location.find_or_initialize_by(city: attrs[:city], state: attrs[:state])
+    self.location = Location.find_or_initialize_by(city: attrs[:city].upcase, state: attrs[:state])
   end
 
 end
