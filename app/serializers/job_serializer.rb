@@ -4,7 +4,7 @@ module JobSerializer
       "id" => self.id,
       "title" => self.title,
       "details" => self.details,
-      "date_posted" => self.date_posted,
+      "date_posted" => self.created_at.iso8601,
       "category" => {
         "name" => self.category.name,
         "id" => self.category.id

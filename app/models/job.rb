@@ -3,9 +3,14 @@ class Job < ApplicationRecord
 
   belongs_to :category
   belongs_to :location
+  validates_associated :category, :location
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { minimum: 10, maximum: 75 }
   validates :details, presence: true
+  validates :location, presence: true
+  validates :category, presence: true
+
+  scope :reverse_chronological, -> { order(created_at: :desc) }
 
   def as_json(options)
     self.serialize
@@ -17,13 +22,7 @@ class Job < ApplicationRecord
   end
 
   def location_attributes=(attrs)
-    self.location = Location.find_or_initialize_by(city: attrs[:city], state: attrs[:state])
-  end
-
-  # Formats the creation date into a string
-  def date_posted
-    d = self.created_at
-    d.strftime("%m/%d/%Y")
+    self.location = Location.find_or_initialize_by(city: attrs[:city].upcase, state: attrs[:state])
   end
 
 end
