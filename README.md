@@ -1,6 +1,6 @@
 ## Job Board API
 
-An API built on Rails 5 that allows clients to view, create, edit, and delete job postings. It is the official backend of the [Job Blob](https://github.com/pkolo/job-blob) web-app. It is backed by a `postgresql` database, and depends on the gems `rspec`, `faker`, `database_cleaner`, and `factory_girl` (mostly for testing).
+A RESTful API built on Rails 5 that allows clients to view, create, edit, and delete job postings. It is the official backend of the [Job Blob](https://github.com/pkolo/job-blob) web-app. It is backed by a `postgresql` database, and depends on the gems `rspec`, `faker`, `database_cleaner`, and `factory_girl` (mostly for testing).
 
 The full API endpoint documentation can be found [here](https://github.com/pkolo/job-board/blob/master/APIdocs.md).
 
