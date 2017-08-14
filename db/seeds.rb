@@ -6,7 +6,8 @@ locations = [
   {city: "Brooklyn", state: "OH"},
   {city: "Rochester", state: "NY"},
   {city: "Rochester", state: "MI"},
-  {city: "Toledo", state: "OH"}
+  {city: "Toledo", state: "OH"},
+  {city: "San Diego", state: "CA"}
 ]
 
 categories = ["Auto", "Business", "Cleaning", "Creative", "Delivery", "Financial",
