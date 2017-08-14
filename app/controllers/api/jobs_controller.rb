@@ -6,7 +6,6 @@ class Api::JobsController < ApplicationController
     jobs = Job.all
     render :json =>
       {
-        status: "ok",
         code: 200,
         messages: [],
         result: jobs
@@ -18,7 +17,6 @@ class Api::JobsController < ApplicationController
     if @job.save
       render :json =>
       {
-        status: "ok",
         code: 200,
         messages: [],
         result: @job
@@ -31,7 +29,6 @@ class Api::JobsController < ApplicationController
     if @job.save
       render :json =>
       {
-        status: "ok",
         code: 201,
         messages: [],
         result: @job
@@ -39,7 +36,6 @@ class Api::JobsController < ApplicationController
     else
       render :json =>
       {
-        status: "errors",
         code: 422,
         messages: @job.errors.full_messages,
         result: []
@@ -53,7 +49,6 @@ class Api::JobsController < ApplicationController
     if @job.save
       render :json =>
       {
-        status: "ok",
         code: 200,
         messages: ["Job successfully updated."],
         result: @job
@@ -61,7 +56,6 @@ class Api::JobsController < ApplicationController
     else
       render :json =>
       {
-        status: "errors",
         code: 422,
         messages: @job.errors.full_messages,
         result: []
@@ -74,7 +68,6 @@ class Api::JobsController < ApplicationController
     if @job.destroy
       render :json =>
       {
-        status: "ok",
         code: 200,
         messages: ["Job successfully deleted."],
         result: []
@@ -85,7 +78,6 @@ class Api::JobsController < ApplicationController
   def not_found
     render :json =>
     {
-      status: "errors",
       code: 404,
       messages: ["Record not found."],
       result: []
