@@ -1,39 +1,19 @@
-# Job Board API
+## Job Board API Endpoint Documentation
 
-#### Serves the following endpoints:
+#### Serves full CRUD resources for `jobs`, via the following endpoints:
 
 `GET /jobs`
 
 Returns a list of all jobs.
 
-  ```
-  {
-      "code": 200,
-      "messages": [],
-      "result":
-        [
-          {
-            "id": 1,
-            "title": "I need a bedroom painted",
-            "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
-            "date_posted": "2017-08-06T22:03:02Z",
-            "category": {"name": "Home", "id": 1},
-            "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-          },
-          ...
-        ]
-    }
-    ```
+Sample success response:
 
-`POST /jobs`
-
-Creates a new job.
-
-  ```
-  {
-      "code": 201,
-      "messages": [],
-      "result":
+```
+{
+    "code": 200,
+    "messages": [],
+    "result":
+      [
         {
           "id": 1,
           "title": "I need a bedroom painted",
@@ -41,58 +21,118 @@ Creates a new job.
           "date_posted": "2017-08-06T22:03:02Z",
           "category": {"name": "Home", "id": 1},
           "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-        }
+        },
+        ...
+      ]
+  }
+  ```
+
+`POST /jobs`
+
+Creates a new job, then returns an object representing that job.
+
+Sample success response:
+
+```
+{
+  "code": 201,
+  "messages": [],
+  "result":
+    {
+      "id": 1,
+      "title": "I need a bedroom painted",
+      "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
+      "date_posted": "2017-08-06T22:03:02Z",
+      "category": {"name": "Home", "id": 1},
+      "location": {"city": "Brooklyn", "state": "NY", "id": 1}
     }
-    ```
+}
+```
+
+Sample failed response:
+
+```
+{
+  "code": 422,
+  "messages": ["Title can't be blank,Details can't be blank"],
+  "result": []
+}
+```
 
 `GET /jobs/{job_id}`
 
-Returns a job associated with a give id.
+Returns a job associated with a given id.
+
+Sample success response:
 
 ```
 {
-    "code": 200,
-    "messages": [],
-    "result":
-      {
-        "id": 1,
-        "title": "I need a bedroom painted",
-        "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
-        "date_posted": "2017-08-06T22:03:02Z",
-        "category": {"name": "Home", "id": 1},
-        "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-      }
-  }
-  ```
+  "code": 200,
+  "messages": [],
+  "result":
+    {
+      "id": 1,
+      "title": "I need a bedroom painted",
+      "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
+      "date_posted": "2017-08-06T22:03:02Z",
+      "category": {"name": "Home", "id": 1},
+      "location": {"city": "Brooklyn", "state": "NY", "id": 1}
+    }
+}
+```
+
+Sample failed response:
+
+```
+{
+  "code": 404,
+  "messages": ["Record not found."],
+  "result": []
+}
+```
 
 `PUT /jobs/{job_id}`
 
-Updates a job associated with a give id.
+Updates a job associated with a give id, then returns that job.
+
+Sample success response:
 
 ```
 {
-    "code": 200,
-    "messages": ["Job successfully updated."],
-    "result":
-      {
-        "id": 1,
-        "title": "I need a bedroom painted",
-        "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
-        "date_posted": "2017-08-06T22:03:02Z",
-        "category": {"name": "Home", "id": 1},
-        "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-      }
-  }
-  ```
+  "code": 200,
+  "messages": ["Job successfully updated."],
+  "result":
+    {
+      "id": 1,
+      "title": "I need a bedroom painted",
+      "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
+      "date_posted": "2017-08-06T22:03:02Z",
+      "category": {"name": "Home", "id": 1},
+      "location": {"city": "Brooklyn", "state": "NY", "id": 1}
+    }
+}
+```
+
+Sample failed response:
+
+```
+{
+  "code": 422,
+  "messages": ["Title can't be blank,Details can't be blank"],
+  "result": []
+}
+```
 
 `DELETE /jobs/{job_id}`
 
 Deletes a job associated with a give id.
 
+Sample success response:
+
 ```
 {
-    "code": 200,
-    "messages": ["Job successfully deleted."],
-    "result": []
-  }
-  ```
+  "code": 200,
+  "messages": ["Job successfully deleted."],
+  "result": []
+}
+```
