@@ -3,7 +3,7 @@ class Api::JobsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
-    jobs = Job.all.reverse_chronological
+    jobs = Job.all
     render :json =>
       {
         status: "ok",
