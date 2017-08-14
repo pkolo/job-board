@@ -2,7 +2,9 @@
 
 #### Serves full CRUD resources for `jobs`, via the following endpoints:
 
-`GET /jobs`
+
+
+`GET /api/jobs`
 
 Returns a list of all jobs.
 
@@ -27,7 +29,7 @@ Sample success response:
   }
   ```
 
-`POST /jobs`
+`POST /api/jobs`
 
 Creates a new job, then returns an object representing that job.
 
@@ -59,7 +61,7 @@ Sample failed response:
 }
 ```
 
-`GET /jobs/{job_id}`
+`GET /api/jobs/{job_id}`
 
 Returns a job associated with a given id.
 
@@ -91,7 +93,7 @@ Sample failed response:
 }
 ```
 
-`PUT /jobs/{job_id}`
+`PUT /api/jobs/{job_id}`
 
 Updates a job associated with a give id, then returns that job.
 
@@ -123,7 +125,7 @@ Sample failed response:
 }
 ```
 
-`DELETE /jobs/{job_id}`
+`DELETE /api/jobs/{job_id}`
 
 Deletes a job associated with a give id.
 
