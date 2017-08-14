@@ -25,4 +25,8 @@ class Job < ApplicationRecord
     self.location = Location.find_or_initialize_by(city: attrs[:city].upcase, state: attrs[:state])
   end
 
+  def date_posted
+    self.created_at.iso8601
+  end
+
 end
