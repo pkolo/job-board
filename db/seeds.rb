@@ -31,6 +31,6 @@ num_tasks = tasks.length
 
     job = Job.create(job_params)
 
-    job.created_at = rand(0..7).days.ago
+    job.created_at = rand(10.days).seconds.ago
     job.save
 end
