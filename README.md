@@ -1,98 +1,23 @@
-# Job Board API
+## Job Board API
 
-#### Serves the following endpoints:
+A RESTful API built on Rails 5 that allows clients to view, create, edit, and delete job postings. It is the official backend of the [Job Blob](https://github.com/pkolo/job-blob) web-app. It is backed by a `postgresql` database, and depends on the gems `rspec`, `faker`, `database_cleaner`, and `factory_girl` (mostly for testing).
 
-`GET /jobs`
+The full API endpoint documentation can be found [here](https://github.com/pkolo/job-board/blob/master/APIdocs.md).
 
-Returns a list of all jobs.
+#### To install
 
-  ```
-  {
-      "code": 200,
-      "messages": [],
-      "result":
-        [
-          {
-            "id": 1,
-            "title": "I need a bedroom painted",
-            "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
-            "date_posted": "2017-08-06T22:03:02Z",
-            "category": {"name": "Home", "id": 1},
-            "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-          },
-          ...
-        ]
-    }
-    ```
+Fork and clone the repo, `cd` into the directory, and
 
-`POST /jobs`
+* `bundle install`
+* `bundle exec rake db:create`
+* `bundle exec rake db:migrate`
+* `bundle exec rake db:seed`
 
-Creates a new job.
 
-  ```
-  {
-      "code": 201,
-      "messages": [],
-      "result":
-        {
-          "id": 1,
-          "title": "I need a bedroom painted",
-          "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
-          "date_posted": "2017-08-06T22:03:02Z",
-          "category": {"name": "Home", "id": 1},
-          "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-        }
-    }
-    ```
+#### To run
 
-`GET /jobs/{job_id}`
+Once installed, `rails s` should start up the server.
 
-Returns a job associated with a give id.
+#### To test
 
-```
-{
-    "code": 200,
-    "messages": [],
-    "result":
-      {
-        "id": 1,
-        "title": "I need a bedroom painted",
-        "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
-        "date_posted": "2017-08-06T22:03:02Z",
-        "category": {"name": "Home", "id": 1},
-        "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-      }
-  }
-  ```
-
-`PUT /jobs/{job_id}`
-
-Updates a job associated with a give id.
-
-```
-{
-    "code": 200,
-    "messages": ["Job successfully updated."],
-    "result":
-      {
-        "id": 1,
-        "title": "I need a bedroom painted",
-        "details": "The bedroom is 8'x10', and the walls are roughly 9' high. I have already purchased the paint, but would need you to bring rollers, ladder, lights, and any other equipment you might require.",
-        "date_posted": "2017-08-06T22:03:02Z",
-        "category": {"name": "Home", "id": 1},
-        "location": {"city": "Brooklyn", "state": "NY", "id": 1}
-      }
-  }
-  ```
-
-`DELETE /jobs/{job_id}`
-
-Deletes a job associated with a give id.
-
-```
-{
-    "code": 200,
-    "messages": ["Job successfully deleted."],
-    "result": []
-  }
-  ```
+`bundle exec rspec` and watch everything (hopefully) pass! If something doesn't pass, please let me know.

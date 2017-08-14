@@ -3,47 +3,29 @@ class Api::JobsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
-    jobs = Job.all.reverse_chronological
+    jobs = Job.all
     render :json =>
-      {
-        status: "ok",
-        code: 200,
-        messages: [],
-        result: jobs
-      }, status: :ok
+      { code: 200, messages: [], result: jobs },
+        status: :ok
   end
 
   def show
     @job = Job.find(params[:id])
-    if @job.save
-      render :json =>
-      {
-        status: "ok",
-        code: 200,
-        messages: [],
-        result: @job
-      }, status: :ok
-    end
+    render :json =>
+      { code: 200, messages: [], result: @job },
+        status: :ok
   end
 
   def create
     @job = Job.new(job_params)
     if @job.save
       render :json =>
-      {
-        status: "ok",
-        code: 201,
-        messages: [],
-        result: @job
-      }, status: :created
+      { code: 201, messages: [], result: @job },
+        status: :created
     else
       render :json =>
-      {
-        status: "errors",
-        code: 422,
-        messages: @job.errors.full_messages,
-        result: []
-      }, status: :unprocessable_entity
+      { code: 422, messages: @job.errors.full_messages, result: [] },
+        status: :unprocessable_entity
     end
   end
 
@@ -52,20 +34,12 @@ class Api::JobsController < ApplicationController
     @job.update_attributes(job_params)
     if @job.save
       render :json =>
-      {
-        status: "ok",
-        code: 200,
-        messages: ["Job successfully updated."],
-        result: @job
-      }, status: :ok
+      { code: 200, messages: ["Job successfully updated."], result: @job },
+        status: :ok
     else
       render :json =>
-      {
-        status: "errors",
-        code: 422,
-        messages: @job.errors.full_messages,
-        result: []
-      }, status: :unprocessable_entity
+      { code: 422, messages: @job.errors.full_messages, result: [] },
+        status: :unprocessable_entity
     end
   end
 
@@ -73,23 +47,15 @@ class Api::JobsController < ApplicationController
     @job = Job.find(params[:id])
     if @job.destroy
       render :json =>
-      {
-        status: "ok",
-        code: 200,
-        messages: ["Job successfully deleted."],
-        result: []
-      }, status: :ok
+      { code: 200, messages: ["Job successfully deleted."], result: [] },
+        status: :ok
     end
   end
 
   def not_found
     render :json =>
-    {
-      status: "errors",
-      code: 404,
-      messages: ["Record not found."],
-      result: []
-    }, status: :not_found
+    { code: 404, messages: ["Record not found."], result: [] },
+      status: :not_found
   end
 
   private
