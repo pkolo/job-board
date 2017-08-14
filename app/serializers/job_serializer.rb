@@ -10,7 +10,7 @@ module JobSerializer
         "id" => self.category.id
       },
       "location" => {
-        "city" => self.location.city,
+        "city" => self.location.capitalized_city,
         "state" => self.location.state,
         "id" => self.location.id
       }

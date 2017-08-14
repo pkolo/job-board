@@ -5,7 +5,7 @@ class Location < ApplicationRecord
   validates :state, presence: true
   validates :city, uniqueness: {scope: :state}
 
-  def to_s
-    "#{self.city}, #{self.state}"
+  def capitalized_city
+    self.city.split.map(&:capitalize).join(' ')
   end
 end
