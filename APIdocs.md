@@ -125,6 +125,7 @@ Sample payload:
     }
   }
 }
+```
 
 Sample success response:
 
